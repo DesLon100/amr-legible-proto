@@ -1,0 +1,658 @@
+
+
+:root{
+  --bg:#ffffff;
+  --fg:#111;
+  --muted:#666;
+  --line:#e8e8ea;
+  --card:#ffffff;
+  --shadow:0 10px 26px rgba(0,0,0,.08);
+  --radius:14px;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  padding:24px 14px;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:transparent;
+  color:var(--fg);
+}
+
+.wrap{
+  max-width:980px;
+  margin:0 auto;
+}
+
+/* Your requirement */
+.wrap.compact{
+  max-width:700px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.status{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.hero{
+  margin:10px 0 14px;
+}
+
+.hero-title{
+  font-size:28px;
+  font-weight:650;
+  letter-spacing:-0.2px;
+  margin:0 0 6px;
+}
+
+.hero-sub{
+  font-size:15px;
+  color:var(--muted);
+  margin:0;
+  line-height:1.35;
+}
+
+/* Card */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:16px;
+}
+
+.hidden{ display:none !important; }
+
+/* Form */
+.form-card{ padding:16px; }
+
+.form-stack{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.form-field label{
+  display:block;
+  font-size:13px;
+  margin-bottom:6px;
+  color:#444;
+}
+
+.form-field input,
+.form-field select{
+  width:100%;
+  height:44px;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  background:#fff;
+  font-size:14px;
+  outline:none;
+}
+
+.form-field input:focus,
+.form-field select:focus{
+  border-color:#b8c0d3;
+  box-shadow:0 0 0 3px rgba(44,58,92,.10);
+}
+
+/* Buttons */
+.btn{
+  height:44px;
+  padding:0 14px;
+  border-radius:12px;
+  border:1px solid #111;
+  background:#111;
+  color:#fff;
+  font-weight:650;
+  cursor:pointer;
+}
+
+.btn.fullwidth{ width:100%; }
+
+.btn.primary{
+  border:none;
+  background:linear-gradient(135deg, #1f2a44, #2c3a5c);
+  color:#fff;
+  transition:filter .15s ease, transform .05s ease;
+}
+.btn.primary:hover{ filter:brightness(1.05); }
+.btn.primary:active{ transform:translateY(1px); }
+.btn.primary:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.btn.ghost{
+  background:#fff;
+  color:#111;
+  border:1px solid var(--line);
+}
+.btn.ghost:hover{
+  border-color:#cfd2da;
+}
+
+/* Toggle switch (Linear/Log) */
+.switch{
+  position:relative;
+  display:inline-block;
+  width:48px;
+  height:26px;
+}
+.switch input{ display:none; }
+
+.slider{
+  position:absolute;
+  cursor:pointer;
+  top:0; left:0; right:0; bottom:0;
+  background:#e6e6ea;
+  transition:.2s;
+  border-radius:999px;
+}
+.slider:before{
+  position:absolute;
+  content:"";
+  height:20px;
+  width:20px;
+  left:3px;
+  top:3px;
+  background:white;
+  transition:.2s;
+  border-radius:50%;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+.switch input:checked + .slider{
+  background:#2c3a5c;
+}
+.switch input:checked + .slider:before{
+  transform:translateX(22px);
+}
+
+.muted{ color:var(--muted); }
+
+/* ---------- PriceCheck Results Layout ---------- */
+
+.pc-chart-wrap{ margin-top:10px; }
+
+/* Prevent the Plotly container collapsing */
+.pc-chart{
+  width:100%;
+  height:360px;
+  min-height:320px;
+}
+
+.pc-toggle-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+/* Investor-safe sentence */
+.pc-context-text{
+  margin-top:12px;
+  font-size:14px;
+  line-height:1.35;
+  white-space:pre-line;
+}
+
+/* Show clearing bands button row (left aligned) */
+.pc-context{
+  display:flex;
+  justify-content:flex-start;
+  margin-top:8px;
+}
+
+.pc-bands-toggle{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  padding:6px 0;
+  font-weight:650;
+  color:var(--fg);
+}
+
+.pc-bands-toggle .chev{
+  display:inline-block;
+  transition:transform .15s ease;
+}
+.pc-bands-toggle[aria-expanded="true"] .chev{
+  transform:rotate(180deg);
+}
+
+/* Bands panel */
+.pc-bands{
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid rgba(0,0,0,0.08);
+}
+
+.pc-bands-chart{
+  width:100%;
+  height:130px;
+  min-height:120px;
+}
+
+/* Optional note under bands */
+.pc-conc-note{
+  margin-top:8px;
+  font-size:12px;
+}
+
+/* Actions row */
+.pc-actions{
+  margin-top:12px;
+}
+/* Section wrapper */
+.pc-section{
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+}
+
+/* Section title */
+.pc-section-title{
+  margin:0 0 8px 0;
+  font-size:17px;
+  font-weight:700;
+  text-align:left;
+  letter-spacing:-0.2px;
+}
+.pc-section-title{
+  color:#1f2a44;   /* your primary */
+}
+.pc-bands-legend{
+  margin-top:8px;
+  font-size:12px;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  display:inline-block;
+}
+
+.dot-your{
+  background:#fee7b1;
+  border:2px solid #2c3a5c;
+}
+
+.dot-equiv{
+  background:#2c3a5c;
+}
+
+.pc-bands-caption{
+  margin-top:6px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.3;
+}
+.pc-sale-link-wrap{
+  margin-top:8px;
+  text-align:left;
+}
+.pc-sale-link{
+  display:inline-block;
+  font-size:14px;
+  text-decoration:underline;
+}
+.hidden{ display:none; }
+.hero-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+
+/* --- HERO TITLE + DOT --- */
+.hero-title{
+  display:flex;
+  align-items:baseline;     /* aligns dot to text baseline area */
+  gap:10px;
+}
+
+/* The dot itself */
+.hero-dot{
+  width:16px;               /* ~15% bigger than 14px */
+  height:16px;
+  border-radius:999px;
+  background:#fee7b1;
+  border:3px solid #2c3a5c; /* match chart ring */
+  box-sizing:border-box;
+
+  /* Nudge down slightly so it sits on the text midline */
+  position:relative;
+  top:0.08em;
+  flex:0 0 auto;
+}
+.pc-move-scrub{ margin: 8px 0 10px; }
+.pc-move-scrub-top{ display:flex; gap:10px; align-items:center; margin-bottom:6px; }
+#pc-target-range{ width:100%; }
+/* Opt-in checkbox row */
+.pc-target-optin{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:10px 0 6px;
+  font-size:14px;
+  user-select:none;
+}
+.pc-target-optin input{
+  width:16px;
+  height:16px;
+}
+
+/* Scrubber container */
+.pc-move-scrub{
+  margin:8px 0 10px;
+  padding:10px 12px;
+  border:1px solid rgba(44,58,92,0.12);
+  border-radius:12px;
+  background: rgba(255,255,255,0.65);
+}
+.pc-move-scrub-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+/* Date range slider: NO "filled" track, just a neutral line + thumb */
+.pc-date-range{
+  width:100%;
+  margin:6px 0 4px;
+  -webkit-appearance:none;
+  appearance:none;
+  background:transparent;
+  height:22px; /* room for thumb */
+}
+
+/* Track (neutral, not filled) */
+.pc-date-range::-webkit-slider-runnable-track{
+  height:4px;
+  background: rgba(44,58,92,0.18);
+  border-radius:999px;
+}
+.pc-date-range::-moz-range-track{
+  height:4px;
+  background: rgba(44,58,92,0.18);
+  border-radius:999px;
+}
+
+/* Thumb */
+.pc-date-range::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#2c3a5c;
+  border:2px solid #ffffff;
+  box-shadow:0 1px 2px rgba(0,0,0,0.15);
+  margin-top:-5px; /* centers thumb on 4px track */
+}
+.pc-date-range::-moz-range-thumb{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#2c3a5c;
+  border:2px solid #ffffff;
+  box-shadow:0 1px 2px rgba(0,0,0,0.15);
+}
+
+/* ===========================
+   FMV: Target month (new UI)
+   =========================== */
+
+.pc-target-wrap{
+  margin-top:12px;
+}
+
+.pc-target-check{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+  user-select:none;
+  margin:6px 0 8px;
+}
+
+.pc-target-check input{
+  width:16px;
+  height:16px;
+}
+
+#pc-target-ui{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:10px 12px;
+  border:1px solid rgba(44,58,92,0.12);
+  border-radius:12px;
+  background:rgba(255,255,255,0.75);
+}
+
+#pc-target-month{
+  height:40px;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  background:#fff;
+  font-size:14px;
+  outline:none;
+  min-width:220px;
+}
+
+#pc-target-month:focus{
+  border-color:#b8c0d3;
+  box-shadow:0 0 0 3px rgba(44,58,92,.10);
+}
+
+#pc-target-hint{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* ===========================
+   Plotly annotation bubble rounding
+   (Plotly annotations are SVG; this affects the annotation text container)
+   =========================== */
+
+/* This targets Plotly annotation backgrounds (SVG rects). 
+   It’s safe: only applies inside Plotly graphs. */
+.js-plotly-plot .annotation rect{
+  rx:10px;
+  ry:10px;
+}
+
+/* Slightly soften the annotation border */
+.js-plotly-plot .annotation rect{
+  stroke: rgba(44,58,92,0.22) !important;
+}
+
+/* Optional: make annotation text feel less cramped */
+.js-plotly-plot .annotation text{
+  font-weight:600;
+}
+.pc-bands-chart{
+  overflow: visible; /* allows bubbles to show outside plot area */
+}
+/* Let Plotly annotations breathe */
+.pc-bands-chart .main-svg{ overflow: visible !important; }
+
+/* Rounded “speech bubble” corners (Plotly annotations are SVG rects) */
+.pc-bands-chart .annotation rect{ rx:10; ry:10; }
+
+/* ---------- FMV (date-axis) slider (DOM, not Plotly) ---------- */
+
+.pc-bands-chart{
+  /* give room for bubbles above track + axis below */
+  height:auto !important;
+  min-height: 120px;
+}
+
+.pc-fmv-row{
+  position: relative;
+  padding-top: 34px;       /* room for bubbles */
+  padding-bottom: 10px;
+}
+
+.pc-fmv-track{
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(44,58,92,0.10);
+}
+
+/* dots */
+.pc-fmv-dot{
+  position:absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+}
+
+.pc-fmv-dot-my{
+  background:#fee7b1;
+  border:3px solid #2c3a5c;
+}
+
+.pc-fmv-dot-eq{
+  background:#2c3a5c;
+}
+
+/* bubbles */
+.pc-fmv-bubble{
+  position:absolute;
+  top: -34px;
+  transform: translateX(-50%);
+  padding: 8px 10px;
+  border-radius: 12px;     /* rounded corners (as requested) */
+  line-height: 1.05;
+  box-shadow: 0 8px 18px rgba(0,0,0,.10);
+  border: 1px solid rgba(44,58,92,0.18);
+  white-space: nowrap;
+  max-width: 44%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* colour-coded bubbles to match dots */
+.pc-fmv-bubble-my{
+  background: #fee7b1;
+  border-color: rgba(44,58,92,0.35);
+}
+
+.pc-fmv-bubble-eq{
+  background: #2c3a5c;
+  color: #fff;
+  border-color: rgba(255,255,255,0.20);
+}
+
+.pc-fmv-b1{
+  font-size: 12px;
+  font-weight: 700;
+  opacity: .95;
+}
+.pc-fmv-b2{
+  font-size: 13px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+/* keep bubbles inside the panel (prevents falling off edges) */
+.pc-fmv-bubble{
+  left: clamp(6%, var(--left, 50%), 94%);
+}
+
+/* axis */
+.pc-fmv-axis{
+  position: relative;
+  margin-top: 10px;
+  height: 18px;
+  font-size: 12px;
+  color: rgba(17,17,17,.75);
+}
+
+.pc-fmv-tick{
+  position:absolute;
+  bottom:0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.pc-fmv-tick::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom: 16px;
+  width:1px;
+  height:6px;
+  background: rgba(44,58,92,0.22);
+}
+
+/* Target-month UI (input box) */
+#pc-target-ui{
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(44,58,92,0.12);
+  background: rgba(255,255,255,0.75);
+}
+
+#pc-target-month{
+  height: 40px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+#pc-target-month:focus{
+  border-color:#b8c0d3;
+  box-shadow:0 0 0 3px rgba(44,58,92,.10);
+}
+
+.pc-toggle-section{
+  margin-top:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+}
+
+.pc-context-text{
+  font-size:14px;
+  line-height:1.4;
+  max-width:600px;
+  text-align:center;
+  white-space:pre-line;
+}
